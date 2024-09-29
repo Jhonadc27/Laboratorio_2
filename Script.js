@@ -1,30 +1,51 @@
-document.getElementById('studentForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevenir que la página se recargue
+document.addEventListener('DOMContentLoaded', () => {
+    const studentForm = document.getElementById('studentForm');
+    const studentList = document.getElementById('studentList');
+    const searchInput = document.getElementById('searchInput');
 
-    // Obtener los valores de los inputs
-    let name = document.getElementById('name').value;
-    let nota1 = document.getElementById('nota1').value;
-    let nota2 = document.getElementById('nota2').value;
-
-    // Crear un nuevo elemento li para la lista de estudiantes
-    let studentList = document.getElementById('studentList');
-    let li = document.createElement('li');
-    li.textContent = `${name} - Nota 1: ${nota1}, Nota 2: ${nota2}`;
-
-    // Crear botón de eliminar
-    let deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Eliminar';
-    deleteBtn.classList.add('delete');
-
-    // Añadir funcionalidad para eliminar el estudiante
-    deleteBtn.addEventListener('click', function() {
-        studentList.removeChild(li);
+    // Manejar la búsqueda de estudiantes
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const students = studentList.getElementsByTagName('li');
+        Array.from(students).forEach((student) => {
+            const studentText = student.textContent.toLowerCase();
+            student.style.display = studentText.includes(searchTerm) ? '' : 'none';
+        });
     });
 
-    // Añadir el botón al li y el li a la lista
-    li.appendChild(deleteBtn);
-    studentList.appendChild(li);
+    // Manejar el envío del formulario
+    studentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-    // Limpiar los campos del formulario
-    document.getElementById('studentForm').reset();
+        const studentName = document.getElementById('studentName').value;
+        const nota1 = document.getElementById('nota1').value;
+        const nota2 = document.getElementById('nota2').value;
+
+        addStudentToList(studentName, nota1, nota2);
+
+        // Limpiar campos
+        studentForm.reset();
+    });
+
+    // Función para añadir estudiante a la lista
+    function addStudentToList(name, nota1, nota2) {
+        const li = document.createElement('li');
+        const span = document.createElement('span');
+        span.textContent = `${name} - Nota 1: ${nota1}, Nota 2: ${nota2}`;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Eliminar';
+        deleteButton.classList.add('delete');
+
+        // Manejar la eliminación de estudiantes
+        deleteButton.addEventListener('click', () => {
+            li.classList.add('removed');
+            setTimeout(() => li.remove(), 500);
+        });
+
+        li.appendChild(span);
+        li.appendChild(deleteButton);
+        li.classList.add('added');
+        studentList.appendChild(li);
+    }
 });

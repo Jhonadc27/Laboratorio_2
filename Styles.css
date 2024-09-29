@@ -1,74 +1,85 @@
+/* Estilo global */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f0f0f0;
+    height: 100vh;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
 }
 
+/* Ajustes del contenedor */
 .form-container {
-    background-color: #a8dadc; /* Fondo verde agua claro */
-    padding: 20px;
+    background-color: #aee6db;
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 350px; /* Ajustar el ancho */
-    text-align: center; /* Centrar contenido */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 400px;  /* Ancho ajustado para mayor espacio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
+/* Estilos de los formularios */
 form {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
 label {
-    font-size: 14px;
+    margin-bottom: 5px;
     font-weight: bold;
-    margin-bottom: 10px;
-    color: #000; /* Color negro */
-    text-transform: lowercase;
+    color: #333;
+    text-align: left; /* Alinear etiquetas a la izquierda */
+    padding-left: 5px;
 }
 
-input {
+input[type="text"],
+input[type="number"],
+#searchInput {
     margin-bottom: 15px;
-    padding: 10px;
-    font-size: 14px;
-    border: none;
+    padding: 12px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    outline: none;
-    background-color: white;
+    width: 100%; /* Asegurar que el input ocupe todo el ancho */
+    box-sizing: border-box; /* Para que el padding no sobrepase el ancho */
+    font-size: 16px;
+    background-color: #fff;
 }
 
-input:focus {
-    border: 2px solid #4a148c; /* Bordes púrpura al enfoque */
+input[type="text"]:focus,
+input[type="number"]:focus,
+#searchInput:focus {
+    outline: none;
+    border-color: #4a007e; /* Cambiar el color del borde al enfocar */
+    box-shadow: 0 0 5px rgba(74, 0, 126, 0.5); /* Resaltar con un glow */
 }
 
 button {
-    background-color: #4a148c; /* Botón púrpura */
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 16px;
+    padding: 12px;
+    background-color: #4a007e;
+    color: #fff;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    text-transform: uppercase;
-    width: 100%;
+    font-size: 16px;
+    width: 100%; /* El botón ocupa el 100% del ancho */
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #380d76; /* Cambiar tono al pasar el mouse */
+    background-color: #6a008c;
 }
 
-.agenda {
-    margin-top: 20px;
-    text-align: left; /* Alinear texto a la izquierda */
-}
-
+/* Ajustes para la lista de estudiantes */
 #studentList {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin-top: 20px;
+    width: 100%;
 }
 
 #studentList li {
@@ -76,16 +87,52 @@ button:hover {
     padding: 10px;
     margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Evitar traslape */
     align-items: center;
     border-radius: 5px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-button.delete {
-    background-color: #e63946; /* Botón rojo de eliminar */
+#studentList li span {
+    margin-right: 10px; /* Espacio entre el texto y el botón */
+}
+
+#studentList li.added {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 0.5s forwards;
+}
+
+#studentList li.removed {
+    opacity: 1;
+    animation: fadeOut 0.5s forwards;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+/* Botón eliminar */
+.delete {
+    background-color: #ff4d4d; /* Rojo */
     color: white;
     border: none;
-    padding: 5px;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.delete:hover {
+    background-color: #ff1a1a; /* Rojo más oscuro al pasar el ratón */
 }

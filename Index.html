@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Estudiante</title>
+    <title>Agenda de Estudiantes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="form-container">
+        <h2>Registro de Estudiante</h2>
         <form id="studentForm">
-            <label for="name">nombre del estudiante</label>
-            <input type="text" id="name" placeholder="nombre del estudiante" required>
+            <label for="studentName">Nombre del estudiante</label>
+            <input type="text" id="studentName" required>
 
-            <label for="nota1">nota corte1</label>
-            <input type="number" id="nota1" placeholder="nota corte1" required>
+            <label for="nota1">Nota Corte 1</label>
+            <input type="number" id="nota1" required>
 
-            <label for="nota2">nota corte2</label>
-            <input type="number" id="nota2" placeholder="nota corte2" required>
+            <label for="nota2">Nota Corte 2</label>
+            <input type="number" id="nota2" required>
 
-            <button type="submit">registrar</button>
+            <button type="submit">Registrar</button>
         </form>
 
-        <!-- Agenda de Estudiantes, justo debajo del formulario -->
-        <div class="agenda">
-            <h2>Agenda de Estudiantes</h2>
-            <ul id="studentList"></ul>
-        </div>
+        <!-- Campo de búsqueda -->
+        <input type="text" id="searchInput" placeholder="Buscar estudiante...">
+
+        <h3>Agenda de Estudiantes</h3>
+        <ul id="studentList"></ul>
     </div>
 
     <script src="script.js"></script>
